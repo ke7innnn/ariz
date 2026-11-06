@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="noir">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Social Vine Studio · Radical Growth & Creative Direction</title>
+  <meta name="description" content="Independent creative digital marketing and social media direction studio in India. Visual identity, cinematic reels, and data-backed organic growth for ambitious brands.">
+  <meta name="theme-color" content="#010109" id="metaThemeColor">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Social Vine Studio · Radical Growth & Creative Direction">
+  <meta property="og:description" content="Independent creative digital marketing and social media agency serving ambitious brands across India.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/images/hero-bg.jpg">
+
+  <!-- Google Fonts: Archivo Variable, Instrument Serif, Inter Tight -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="/src/styles/index.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 L28 16 L16 29 L4 16 Z' fill='%232B38D9'/%3E%3C/svg%3E">
+</head>
+<body class="curseur-on">
+
+  <!-- Fullscreen Ambient Black & Radiant Gradient Canvas -->
+  <div class="bg-gradient-canvas" id="bgGradientCanvas" aria-hidden="true"></div>
+
+  <!-- Magnetic Difference Cursor (neuv.fr style) -->
+  <div class="c-anneau" id="customCursorRing" aria-hidden="true">
+    <span class="c-libelle" id="customCursorLabel">View</span>
+  </div>
+  <div class="c-point" id="customCursorDot" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       CINEMATIC HERO INTRO OVERLAY (neuv.fr inspired aperture & brand reveal)
+       ========================================================================== -->
+  <div class="intro-overlay" id="introOverlay" aria-hidden="true">
+    <div class="intro-backdrop" id="introBackdrop"></div>
+    <div class="intro-stage" id="introStage">
+      <!-- Architectural Blueprint Hairlines -->
+      <div class="intro-hairline intro-hairline-h" id="introHairlineH" aria-hidden="true"></div>
+      <div class="intro-hairline intro-hairline-v" id="introHairlineV" aria-hidden="true"></div>
+
+      <!-- Central Brand Reveal Unit -->
+      <div class="intro-brand" id="introBrand">
+        <div class="intro-logo-box" id="introLogoBox">
+          <svg class="intro-logo-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="intro-logo-arc" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path class="intro-logo-diamond" d="M18 10L24 18L18 26L12 18L18 10Z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="intro-title-wrap">
+          <div class="intro-mask">
+            <span class="intro-word" id="introWord">THE SOCIAL VINE</span>
+          </div>
+        </div>
+
+        <div class="intro-meta-wrap">
+          <div class="intro-mask">
+            <span class="intro-sub" id="introSub">STUDIO · DIRECTION · 2024</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Architectural Corner Coordinate Annotations -->
+      <div class="intro-cote intro-cote-tl" id="introCoteTL" aria-hidden="true">SYS · 01</div>
+      <div class="intro-cote intro-cote-tr" id="introCoteTR" aria-hidden="true">INDEX · REF</div>
+      <div class="intro-cote intro-cote-bl" id="introCoteBL" aria-hidden="true">19.0760° N · 72.8777° E</div>
+      <div class="intro-cote intro-cote-br" id="introCoteBR" aria-hidden="true">TSV · FR/IN</div>
+    </div>
+  </div>
+
+  <!-- Minimalist Fixed Header Navigation (.acces) -->
+  <header class="acces" id="mainHeader">
+    <a href="#hero" class="logo-monogram" aria-label="The Social Vine Studio, back to top">
+      <!-- Minimalist Luxury Fluid Vine SVG Mark -->
+      <svg class="logo-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M18 10L24 18L18 26L12 18L18 10Z" fill="currentColor"/>
+      </svg>
+      <span class="logo-text">TSV STUDIO</span>
+    </a>
+
+    <nav class="acces-nav" aria-label="Primary Navigation">
+      <a href="#work" class="interactive-target">Work</a>
+      <a href="#services" class="interactive-target">Disciplines</a>
+      <a href="#pricing" class="interactive-target">Pricing</a>
+      <a href="#about" class="interactive-target">About</a>
+      <a href="#contact" class="interactive-target">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION (Replicating neuv.fr with Scroll Animation)
+         ========================================================================== -->
+    <div class="hero-pinned-scene" id="heroScene">
+      <div class="hero-sticky-stage" id="heroStage">
+        <!-- Architectural Blueprint Plan Grid (Drawn on scroll) -->
+        <div class="plan" id="planGrid" aria-hidden="true"></div>
+
+        <section class="hero-neuv" id="hero">
+          <!-- Central Minimalist Dot Indicator -->
+          <div class="hero-indicator" id="heroIndicator" aria-hidden="true">
+            <span></span>
+          </div>
+
+          <!-- Monumental Centered Typographic Statement -->
+          <h1 class="titre hero-statement" id="heroStatement">
+            <span class="ligne ligne-1 masque"><span class="mot" id="motRadical" style="--i:0">RADICAL</span></span>
+            <span class="ligne ligne-2 masque"><span class="mot" id="motGrowth" style="--i:1">GROWTH</span></span>
+            <span class="ligne ligne-3 masque"><span class="mot" id="motDirection" style="--i:2">DIRECTION.</span></span>
+          </h1>
+
+          <!-- Minimalist Meta Subtitle -->
+          <p class="meta hero-meta" id="heroMeta">
+            The Social Vine Studio · Independent Creative &amp; Social Direction for Ambitious Brands Across India
+          </p>
+
+          <!-- Discreet Bottom Scroll Cue -->
+          <a href="#work" class="hero-scroll-cue interactive-target" id="heroScrollCue" aria-label="Scroll to selected work">
+            <span class="meta">Scroll to explore</span>
+            <span class="scroll-arrow" aria-hidden="true">↓</span>
+          </a>
+        </section>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         SELECTED WORK (Horizontal Living Gallery - Scroll-Pinned Scene)
+         ========================================================================== -->
+    <section class="section-galerie galerie-pinned-scene" id="work" aria-label="Selected Work">
+      <div class="galerie-sticky-stage" id="galerieStage">
+          <div class="galerie-entete">
+            <div class="galerie-entete-left">
+              <h2 class="galerie-titre">Selected Work</h2>
+              <span class="galerie-compteur" id="galerieCompteur">01 / 05</span>
+            </div>
+            <div class="galerie-commandes">
+              <div class="galerie-progress-track" aria-hidden="true">
+                <div class="galerie-progress-bar" id="galerieProgressBar"></div>
+              </div>
+              <button type="button" class="galerie-btn interactive-target" id="galeriePrevBtn" aria-label="Previous project">←</button>
+              <button type="button" class="galerie-btn interactive-target" id="galerieNextBtn" aria-label="Next project">→</button>
+              <span class="meta galerie-drag-hint" style="margin-left: 0.5rem; opacity: 0.7;">Drag · ← →</span>
+            </div>
+          </div>
+
+          <!-- Horizontal Drag & Scroll Track -->
+          <div class="glisseur-wrap" id="glisseurWrap">
+            <ol class="galerie-piste" id="galeriePiste">
+
+              <!-- Project 01: Koffie Culture -->
+              <li class="projet-item" data-ancre="T">
+                <a href="#project-koffie" class="projet-lien interactive-target" data-cursor="View" data-project="koffie">
+                  <span class="projet-cadre">
+                    <img src="/assets/images/cafe-craft.jpg" alt="Koffie Culture Roasters" loading="eager" />
+                  </span>
+                  <div class="projet-legende">
+                    <span class="projet-nom">01 — Koffie Culture</span>
+                    <span class="projet-fleche" aria-hidden="true">→</span>
+                    <span class="projet-disc">Specialty Hospitality · Reels &amp; Direction</span>
+                  </div>
+                </a>
+              </li>
+
+              <!-- Project 02: Luma Botanicals -->
+              <li class="projet-item" data-ancre="B">
+                <a href="#project-luma" class="projet-lien interactive-target" data-cursor="View" data-project="luma">
+                  <span class="projet-cadre">
+                    <img src="/assets/images/d2c-skincare.jpg" alt="Luma Botanicals" loading="eager" />
+                  </span>
+                  <div class="projet-legende">
+                    <span class="projet-nom">02 — Luma Botanicals</span>
+                    <span class="projet-fleche" aria-hidden="true">→</span>
+                    <span class="projet-disc">D2C Clean Beauty · Paid Ads &amp; Visuals</span>
+                  </div>
+                </a>
+              </li>
+
+              <!-- Project 03: Verve Urban Apparel -->
+              <li class="projet-item" data-ancre="T">
+                <a href="#project-verve" class="projet-lien interactive-target" data-cursor="View" data-project="verve">
+                  <span class="projet-cadre">
+                    <img src="/assets/images/portfolio-fashion.jpg" alt="Verve Urban Apparel" loading="lazy" />
+                  </span>
+                  <div class="projet-legende">
+                    <span class="projet-nom">03 — Verve Apparel</span>
+                    <span class="projet-fleche" aria-hidden="true">→</span>
+                    <span class="projet-disc">Luxury Fashion · Campaign &amp; Identity</span>
+                  </div>
+                </a>
+              </li>
+
+              <!-- Project 04: Studio Forma Architecture -->
+              <li class="projet-item" data-ancre="B">
+                <a href="#project-forma" class="projet-lien interactive-target" data-cursor="View" data-project="forma">
+                  <span class="projet-cadre">
+                    <img src="/assets/images/portfolio-architecture.jpg" alt="Studio Forma Architecture" loading="lazy" />
+                  </span>
+                  <div class="projet-legende">
+                    <span class="projet-nom">04 — Studio Forma</span>
+                    <span class="projet-fleche" aria-hidden="true">→</span>
+                    <span class="projet-disc">Architecture &amp; Spaces · Cinematic Lead Gen</span>
+                  </div>
+                </a>
+              </li>
+
+              <!-- Project 05: Soma Movement Collective -->
+              <li class="projet-item" data-ancre="M">
+                <a href="#project-soma" class="projet-lien interactive-target" data-cursor="View" data-project="soma">
+                  <span class="projet-cadre">
+                    <img src="/assets/images/portfolio-fitness.jpg" alt="Soma Movement Collective" loading="lazy" />
+                  </span>
+                  <div class="projet-legende">
+                    <span class="projet-nom">05 — Soma Movement</span>
+                    <span class="projet-fleche" aria-hidden="true">→</span>
+                    <span class="projet-disc">Wellness &amp; Performance · Community Retainer</span>
+                  </div>
+                </a>
+              </li>
+
+            </ol>
+          </div>
+        </div>
+      </section>
+
+    <!-- ==========================================================================
+         DISCIPLINES (3-Column Minimal Architectural Grid)
+         ========================================================================== -->
+    <section class="section-disciplines" id="services" aria-labelledby="disciplinesHeading">
+      <h2 class="disciplines-titre-section" id="disciplinesHeading">Disciplines</h2>
+
+      <ol class="disciplines-grid">
+        <!-- Discipline 01 -->
+        <li class="discipline-col">
+          <div>
+            <h3 class="discipline-nom">Social Direction</h3>
+            <p class="discipline-desc">
+              Visual identity, narrative positioning, and aesthetic grid curation for brands that demand cultural prestige and distinctive audience loyalty.
+            </p>
+          </div>
+          <div class="discipline-preuves">
+            <a href="#work" class="discipline-lien interactive-target" data-project="koffie">Koffie Culture →</a>
+            <a href="#work" class="discipline-lien interactive-target" data-project="verve">Verve Apparel →</a>
+          </div>
+        </li>
+
+        <!-- Discipline 02 -->
+        <li class="discipline-col">
+          <div>
+            <h3 class="discipline-nom">Imagery &amp; Reels</h3>
+            <p class="discipline-desc">
+              Scroll-stopping short-form video production, editorial cinematography, product styling, and high-conversion lifestyle assets engineered for virality.
+            </p>
+          </div>
+          <div class="discipline-preuves">
+            <a href="#work" class="discipline-lien interactive-target" data-project="luma">Luma Botanicals →</a>
+            <a href="#work" class="discipline-lien interactive-target" data-project="soma">Soma Movement →</a>
+          </div>
+        </li>
+
+        <!-- Discipline 03 -->
+        <li class="discipline-col">
+          <div>
+            <h3 class="discipline-nom">Growth &amp; Media</h3>
+            <p class="discipline-desc">
+              High-return paid advertising across Meta and Google, algorithmic distribution funnels, high-ticket lead generation, and creator partnerships.
+            </p>
+          </div>
+          <div class="discipline-preuves">
+            <a href="#work" class="discipline-lien interactive-target" data-project="forma">Studio Forma →</a>
+            <a href="#contact" class="discipline-lien interactive-target">Growth Retainers →</a>
+          </div>
+        </li>
+      </ol>
+
+      <div class="disciplines-footer-meta">
+        <span class="meta">Mumbai &amp; Serving Brands Across India</span>
+        <span class="meta">Strategy · Content Creation · End-to-End Retainers</span>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PRICING / MONTHLY RETAINERS (Editorial Creative Studio Packages)
+         ========================================================================== -->
+    <section class="section-pricing" id="pricing" aria-labelledby="pricingTitle">
+      <div class="pricing-header">
+        <div class="pricing-header-top">
+          <span class="meta pricing-kicker">03 / MONTHLY RETAINERS</span>
+          <span class="meta pricing-subnote">Three plans. One goal — making your brand stand out.</span>
+        </div>
+
+        <div class="pricing-title-wrap">
+          <h2 class="pricing-titre-section" id="pricingTitle">
+            <span class="ligne"><span class="mot">YOUR BRAND.</span></span>
+            <span class="ligne"><span class="mot">YOUR GROWTH.</span></span>
+          </h2>
+        </div>
+
+        <p class="pricing-lead">
+          From building your presence to scaling your content, find the right creative support for your brand.
+        </p>
+      </div>
+
+      <!-- 3-Column Editorial Retainers Grid -->
+      <div class="pricing-grid" role="list">
+        <!-- Package 01: Starter -->
+        <article class="pricing-card interactive-target" role="listitem" data-package="starter">
+          <div class="pricing-card-top">
+            <span class="meta pricing-card-num">01</span>
+            <span class="pricing-card-code">RETAINER · PRESENCE</span>
+          </div>
+
+          <div class="pricing-card-heading">
+            <h3 class="pricing-card-name">Starter</h3>
+            <p class="pricing-card-subtitle">BUILD YOUR PRESENCE</p>
+          </div>
+
+          <div class="pricing-price-wrap">
+            <span class="pricing-price-val">₹4,999</span>
+            <span class="pricing-price-period">/ MONTH</span>
+          </div>
+
+          <!-- Editorial Prominent Deliverables -->
+          <div class="pricing-deliverables">
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">04 <span class="pricing-deliv-unit">REELS</span></div>
+              <div class="pricing-deliv-desc">short, engaging videos</div>
+            </div>
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">06 <span class="pricing-deliv-unit">POSTS</span></div>
+              <div class="pricing-deliv-desc">feed posts / creatives</div>
+            </div>
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">06 <span class="pricing-deliv-unit">STORIES</span></div>
+              <div class="pricing-deliv-desc">daily engagement</div>
+            </div>
+          </div>
+
+          <!-- Included Services List -->
+          <ul class="pricing-features-list">
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Content Planning &amp; Strategy</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Captions &amp; Hashtags</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Basic Performance Report</span>
+            </li>
+          </ul>
+
+          <div class="pricing-card-footer">
+            <button type="button" class="btn-pricing-cta interactive-target" data-plan="Starter" data-price="₹4,999/month">
+              <span>Choose Starter</span>
+              <span class="btn-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Package 02: Growth (Subtle Emphasis / Most Popular) -->
+        <article class="pricing-card is-popular interactive-target" role="listitem" data-package="growth">
+          <div class="pricing-card-top">
+            <span class="meta pricing-card-num">02</span>
+            <span class="pricing-popular-badge">MOST POPULAR</span>
+          </div>
+
+          <div class="pricing-card-heading">
+            <h3 class="pricing-card-name">Growth</h3>
+            <p class="pricing-card-subtitle">EXPAND YOUR REACH</p>
+          </div>
+
+          <div class="pricing-price-wrap">
+            <span class="pricing-price-val">₹7,999</span>
+            <span class="pricing-price-period">/ MONTH</span>
+          </div>
+
+          <!-- Editorial Prominent Deliverables -->
+          <div class="pricing-deliverables">
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">08 <span class="pricing-deliv-unit">REELS</span></div>
+              <div class="pricing-deliv-desc">short, engaging videos</div>
+            </div>
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">10 <span class="pricing-deliv-unit">POSTS</span></div>
+              <div class="pricing-deliv-desc">feed posts / creatives</div>
+            </div>
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">12 <span class="pricing-deliv-unit">STORIES</span></div>
+              <div class="pricing-deliv-desc">daily engagement</div>
+            </div>
+          </div>
+
+          <!-- Included Services List -->
+          <ul class="pricing-features-list">
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Content Planning &amp; Strategy</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Captions &amp; Hashtags</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Basic Performance Report</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Audience Engagement Support</span>
+            </li>
+          </ul>
+
+          <div class="pricing-card-footer">
+            <button type="button" class="btn-pricing-cta btn-pricing-popular interactive-target" data-plan="Growth" data-price="₹7,999/month">
+              <span>Choose Growth</span>
+              <span class="btn-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Package 03: Premium -->
+        <article class="pricing-card interactive-target" role="listitem" data-package="premium">
+          <div class="pricing-card-top">
+            <span class="meta pricing-card-num">03</span>
+            <span class="pricing-card-code">RETAINER · MAXIMUM</span>
+          </div>
+
+          <div class="pricing-card-heading">
+            <h3 class="pricing-card-name">Premium</h3>
+            <p class="pricing-card-subtitle">MAXIMUM IMPACT</p>
+          </div>
+
+          <div class="pricing-price-wrap">
+            <span class="pricing-price-val">₹17,999</span>
+            <span class="pricing-price-period">/ MONTH</span>
+          </div>
+
+          <!-- Editorial Prominent Deliverables -->
+          <div class="pricing-deliverables">
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">12 <span class="pricing-deliv-unit">REELS</span></div>
+              <div class="pricing-deliv-desc">short, engaging videos</div>
+            </div>
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">12 <span class="pricing-deliv-unit">POSTS</span></div>
+              <div class="pricing-deliv-desc">feed posts / creatives</div>
+            </div>
+            <div class="pricing-deliv-item">
+              <div class="pricing-deliv-count">14 <span class="pricing-deliv-unit">STORIES</span></div>
+              <div class="pricing-deliv-desc">daily engagement</div>
+            </div>
+          </div>
+
+          <!-- Included Services List -->
+          <ul class="pricing-features-list">
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Content Planning &amp; Strategy</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Captions &amp; Hashtags</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Basic Performance Report</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Audience Engagement Support</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-marker" aria-hidden="true">—</span>
+              <span>Priority Support</span>
+            </li>
+          </ul>
+
+          <div class="pricing-card-footer">
+            <button type="button" class="btn-pricing-cta interactive-target" data-plan="Premium" data-price="₹17,999/month">
+              <span>Choose Premium</span>
+              <span class="btn-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- Premium Horizontal Add-On: On-Site Model Shoot -->
+      <div class="pricing-addon-panel interactive-target" id="shootAddon">
+        <div class="pricing-addon-left">
+          <span class="meta pricing-addon-tag">OPTIONAL ADD-ON</span>
+          <h3 class="pricing-addon-title">ON-SITE MODEL SHOOT.</h3>
+          <p class="pricing-addon-desc">
+            Professional on-location photoshoots for your brand. High-concept creative direction, studio lighting, professional model staging, and color-graded editorial stills ready for high-conversion campaigns.
+          </p>
+          <div class="pricing-addon-specs">
+            <span class="meta">ON-LOCATION DIRECTION</span>
+            <span class="meta">·</span>
+            <span class="meta">COLOR-GRADED STILLS</span>
+            <span class="meta">·</span>
+            <span class="meta">COMMERCIAL RIGHTS</span>
+          </div>
+        </div>
+
+        <div class="pricing-addon-right">
+          <div class="pricing-addon-price-block">
+            <div class="pricing-addon-price">₹3,500 – ₹5,000</div>
+            <div class="pricing-addon-period">/ SESSION</div>
+          </div>
+          <button type="button" class="btn-pricing-cta btn-addon-cta interactive-target" data-plan="On-Site Model Shoot" data-price="₹3,500 – ₹5,000/session">
+            <span>Enquire About a Shoot</span>
+            <span class="btn-arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ABOUT / STUDIO MANIFESTO
+         ========================================================================== -->
+    <section class="section-manifesto" id="about" aria-labelledby="manifestoHeading">
+      <h2 class="manifesto-lead" id="manifestoHeading">
+        We build scroll-stopping digital presence for ambitious brands that refuse to blend in.
+      </h2>
+
+      <div class="manifesto-stats">
+        <div class="stat-item">
+          <span class="stat-num">50+</span>
+          <span class="stat-label">Ambitious Brands Scaled</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">3.4x</span>
+          <span class="stat-label">Average Reach Multiplier</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">94%</span>
+          <span class="stat-label">Annual Client Retainer Rate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTACT SECTION (Monumental neuv.fr Closure)
+         ========================================================================== -->
+    <section class="section-contact-neuv" id="contact" aria-labelledby="contactTitle">
+      <div class="contact-meta">
+        <p class="meta">Replies within 24 hours · Monthly Retainers &amp; Custom Campaigns</p>
+      </div>
+
+      <h2 class="titre-fin" id="contactTitle">
+        Have a project<br>in mind?
+      </h2>
+
+      <div class="contact-actions">
+        <a href="mailto:hello@thesocialvine.studio" class="mail-fin interactive-target">
+          hello@thesocialvine.studio
+        </a>
+
+        <div class="contact-buttons-row">
+          <button type="button" class="btn-concierge interactive-target" id="openBookingModalBtn">
+            <span>Book Discovery Consultation →</span>
+          </button>
+
+          <a href="https://wa.me/919876543210?text=Hi%20The%20Social%20Vine%20Studio,%20I'd%20like%20to%20discuss%20a%20project%20for%20my%20brand." target="_blank" rel="noopener" class="btn-whatsapp-minimal interactive-target">
+            <span>Direct WhatsApp Concierge →</span>
+          </a>
+        </div>
+      </div>
+
+      <footer class="footer-bar-neuv">
+        <div>
+          <span>THE SOCIAL VINE STUDIO · Independent Creative Office · Mumbai &amp; Pan-India</span>
+        </div>
+        <div class="footer-legal-links">
+          <span>© 2026</span>
+          <a href="#about" class="interactive-target">About</a>
+          <a href="#services" class="interactive-target">Disciplines</a>
+          <a href="#pricing" class="interactive-target">Pricing</a>
+          <a href="#contact" class="interactive-target">Contact</a>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       DISCOVERY CONSULTATION MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalBookingTitle">
+    <div class="modal-content-luxury">
+      <button type="button" class="modal-close-neuv interactive-target" id="closeBookingModalBtn" aria-label="Close consultation modal">✕</button>
+
+      <p class="meta" style="margin-bottom: 0.5rem; color: var(--accent-vine);">Discovery Consultation</p>
+      <h3 class="titre" id="modalBookingTitle" style="font-size: 2.2rem; margin-bottom: 1.5rem;">Let's Grow Your Brand</h3>
+
+      <form id="luxuryInquiryForm">
+        <!-- Retainer / Package Selection Status & Pills -->
+        <div class="form-neuv-group">
+          <div class="form-plan-status-bar" id="formPlanStatusBar">
+            <span class="meta">Interested Retainer:</span>
+            <span class="form-selected-plan-badge" id="formPlanBadgeText">Growth — ₹7,999/month</span>
+          </div>
+
+          <label class="form-neuv-label">Selected Monthly Plan / Service</label>
+          <div class="form-neuv-pills form-plan-pills" id="planPillsContainer">
+            <label class="neuv-pill interactive-target" data-plan-value="Starter — ₹4,999/month">
+              <input type="radio" name="selectedPlan" value="Starter — ₹4,999/month" />
+              <span>Starter (₹4,999/mo)</span>
+            </label>
+            <label class="neuv-pill interactive-target selected" data-plan-value="Growth — ₹7,999/month">
+              <input type="radio" name="selectedPlan" value="Growth — ₹7,999/month" checked />
+              <span>Growth (₹7,999/mo)</span>
+            </label>
+            <label class="neuv-pill interactive-target" data-plan-value="Premium — ₹17,999/month">
+              <input type="radio" name="selectedPlan" value="Premium — ₹17,999/month" />
+              <span>Premium (₹17,999/mo)</span>
+            </label>
+            <label class="neuv-pill interactive-target" data-plan-value="On-Site Model Shoot — ₹3,500–₹5,000/session">
+              <input type="radio" name="selectedPlan" value="On-Site Model Shoot — ₹3,500–₹5,000/session" />
+              <span>Model Shoot (₹3.5k–₹5k)</span>
+            </label>
+            <label class="neuv-pill interactive-target" data-plan-value="Custom Retainer / Bespoke">
+              <input type="radio" name="selectedPlan" value="Custom Retainer / Bespoke" />
+              <span>Custom Retainer</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-neuv-group">
+          <label class="form-neuv-label" for="clientName">Your Name *</label>
+          <input type="text" id="clientName" class="form-neuv-input" placeholder="e.g. Rahul Sharma" required />
+        </div>
+
+        <div class="form-neuv-group">
+          <label class="form-neuv-label" for="clientEmail">Email Address *</label>
+          <input type="email" id="clientEmail" class="form-neuv-input" placeholder="e.g. rahul@brand.com" required />
+        </div>
+
+        <div class="form-neuv-group">
+          <label class="form-neuv-label" for="clientPhone">WhatsApp / Phone Number *</label>
+          <input type="tel" id="clientPhone" class="form-neuv-input" placeholder="+91 98765 43210" required />
+        </div>
+
+        <div class="form-neuv-group">
+          <label class="form-neuv-label">Included / Key Focus Services</label>
+          <div class="form-neuv-pills">
+            <label class="neuv-pill interactive-target selected">
+              <input type="checkbox" name="services" value="Content Creation" checked />
+              <span>Content Creation</span>
+            </label>
+            <label class="neuv-pill interactive-target selected">
+              <input type="checkbox" name="services" value="Social Management" checked />
+              <span>Social Management</span>
+            </label>
+            <label class="neuv-pill interactive-target">
+              <input type="checkbox" name="services" value="Reels & Video" />
+              <span>Reels &amp; Video</span>
+            </label>
+            <label class="neuv-pill interactive-target">
+              <input type="checkbox" name="services" value="Paid Media Ads" />
+              <span>Paid Media Ads</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-neuv-group">
+          <label class="form-neuv-label" for="brandDetails">Tell Us About Your Brand *</label>
+          <textarea id="brandDetails" class="form-neuv-input" rows="3" placeholder="Share your Instagram handle and your primary goals..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-form-neuv-submit interactive-target">
+          Submit Consultation Request →
+        </button>
+
+        <p class="meta" style="text-align: center; margin-top: 1rem; font-size: 0.7rem;">
+          We respect your privacy. Inquiries receive replies within 24 business hours.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PROJECT CASE STUDY MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
+    <div class="modal-content-luxury">
+      <button type="button" class="modal-close-neuv interactive-target" id="closeProjectModalBtn" aria-label="Close project modal">✕</button>
+
+      <p class="meta" id="modalProjectCategory" style="margin-bottom: 0.5rem; color: var(--accent-vine);">Case Study</p>
+      <h3 class="titre" id="modalProjectTitle" style="font-size: 2.2rem; margin-bottom: 1.5rem;">Project Title</h3>
+
+      <div style="aspect-ratio: 16/9; background: var(--cadre-vide); border-radius: 6px; overflow: hidden; margin-bottom: 1.75rem;">
+        <img id="modalProjectImage" src="" alt="Project Preview" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; border-top: 1px solid var(--trait); border-bottom: 1px solid var(--trait); padding: 1.25rem 0; margin-bottom: 1.5rem;">
+        <div>
+          <span class="meta">Key Performance Metric</span>
+          <p id="modalProjectMetric" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; margin-top: 0.25rem; color: var(--texte);">+185% Growth</p>
+        </div>
+        <div>
+          <span class="meta">Campaign Scope</span>
+          <p id="modalProjectScope" style="font-size: 0.9rem; margin-top: 0.25rem; color: var(--doux);">Reels Production, Paid Ads, Visual Direction</p>
+        </div>
+      </div>
+
+      <p id="modalProjectDescription" style="font-size: 0.95rem; line-height: 1.6; color: var(--doux); margin-bottom: 2rem;">
+        Full campaign breakdown and organic content direction delivered by The Social Vine Studio.
+      </p>
+
+      <button type="button" class="btn-concierge interactive-target" id="modalProjectInquireBtn" style="width: 100%; justify-content: center;">
+        Inquire for Similar Results →
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

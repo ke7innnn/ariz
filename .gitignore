@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Production build
+dist/
+
+# Vercel
+.vercel/
+
+# Local Environment & Logs
+*.log
+.DS_Store
+
+# Scratch & Screenshots
+screenshot_*.png
+screenshots/
+test_intro.js
