@@ -90,7 +90,44 @@
       <a href="#about" class="interactive-target">About</a>
       <a href="#contact" class="interactive-target">Contact</a>
     </nav>
+
+    <div class="acces-right-actions">
+      <a href="https://wa.me/919876543210?text=Hi%20The%20Social%20Vine%20Studio!%20I'd%20like%20to%20discuss%20growing%20my%20brand." target="_blank" rel="noopener noreferrer" class="acces-wa-pill interactive-target" aria-label="Chat on WhatsApp">
+        <span class="wa-dot" aria-hidden="true"></span>
+        <span>WhatsApp ↗</span>
+      </a>
+      <button type="button" class="mobile-menu-toggle interactive-target" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileNavDrawer">
+        <span class="hamburger-box" aria-hidden="true">
+          <span class="hamburger-line line-top"></span>
+          <span class="hamburger-line line-bottom"></span>
+        </span>
+        <span class="mobile-menu-label" id="mobileMenuLabel">Menu</span>
+      </button>
+    </div>
   </header>
+
+  <!-- Luxury Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+    <div class="mobile-nav-inner">
+      <div class="mobile-nav-kicker meta">NAVIGATION · TSV STUDIO</div>
+      <nav class="mobile-nav-links" aria-label="Mobile Navigation">
+        <a href="#work" class="mobile-nav-link"><span class="meta">01</span><span>Selected Work</span></a>
+        <a href="#services" class="mobile-nav-link"><span class="meta">02</span><span>Disciplines</span></a>
+        <a href="#pricing" class="mobile-nav-link"><span class="meta">03</span><span>Retainers &amp; Pricing</span></a>
+        <a href="#about" class="mobile-nav-link"><span class="meta">04</span><span>Studio Manifesto</span></a>
+        <a href="#contact" class="mobile-nav-link"><span class="meta">05</span><span>Contact &amp; Inquiry</span></a>
+      </nav>
+      <div class="mobile-nav-footer">
+        <button type="button" class="btn-concierge mobile-drawer-book-btn" id="mobileDrawerBookBtn">
+          <span>Book Discovery Consultation →</span>
+        </button>
+        <a href="https://wa.me/919876543210?text=Hi%20The%20Social%20Vine%20Studio,%20I'd%20like%20to%20discuss%20a%20project%20for%20my%20brand." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-minimal mobile-drawer-wa-btn">
+          <span>Direct WhatsApp Concierge →</span>
+        </a>
+        <div class="mobile-nav-meta meta">Mumbai &amp; Serving Brands Across India</div>
+      </div>
+    </div>
+  </div>
 
   <main>
     <!-- ==========================================================================
@@ -546,30 +583,134 @@
     </section>
 
     <!-- ==========================================================================
-         CONTACT SECTION (Monumental neuv.fr Closure)
+         CONTACT SECTION (Monumental neuv.fr Closure + Direct WhatsApp Form)
          ========================================================================== -->
     <section class="section-contact-neuv" id="contact" aria-labelledby="contactTitle">
-      <div class="contact-meta">
-        <p class="meta">Replies within 24 hours · Monthly Retainers &amp; Custom Campaigns</p>
-      </div>
+      <div class="contact-split-grid">
+        <div class="contact-left-col">
+          <div class="contact-meta">
+            <p class="meta">05 / CONTACT · Replies within 24 hours · Direct WhatsApp Concierge</p>
+          </div>
 
-      <h2 class="titre-fin" id="contactTitle">
-        Have a project<br>in mind?
-      </h2>
+          <h2 class="titre-fin" id="contactTitle">
+            Have a project<br>in mind?
+          </h2>
 
-      <div class="contact-actions">
-        <a href="mailto:hello@thesocialvine.studio" class="mail-fin interactive-target">
-          hello@thesocialvine.studio
-        </a>
+          <p class="contact-lead-text">
+            Submit your brand details to launch a pre-filled WhatsApp conversation directly with our creative direction team, or reach out via instant concierge below.
+          </p>
 
-        <div class="contact-buttons-row">
-          <button type="button" class="btn-concierge interactive-target" id="openBookingModalBtn">
-            <span>Book Discovery Consultation →</span>
-          </button>
+          <div class="contact-actions">
+            <a href="https://wa.me/919876543210?text=Hi%20The%20Social%20Vine%20Studio,%20I'd%20like%20to%20discuss%20a%20project%20for%20my%20brand." target="_blank" rel="noopener noreferrer" class="mail-fin interactive-target">
+              +91 98765 43210 · WhatsApp
+            </a>
+            <a href="mailto:hello@thesocialvine.studio" class="contact-email-sub interactive-target">
+              hello@thesocialvine.studio
+            </a>
 
-          <a href="https://wa.me/919876543210?text=Hi%20The%20Social%20Vine%20Studio,%20I'd%20like%20to%20discuss%20a%20project%20for%20my%20brand." target="_blank" rel="noopener" class="btn-whatsapp-minimal interactive-target">
-            <span>Direct WhatsApp Concierge →</span>
-          </a>
+            <div class="contact-buttons-row">
+              <button type="button" class="btn-concierge interactive-target" id="openBookingModalBtn">
+                <span>Book Discovery Consultation →</span>
+              </button>
+
+              <a href="https://wa.me/919876543210?text=Hi%20The%20Social%20Vine%20Studio,%20I'd%20like%20to%20discuss%20a%20project%20for%20my%20brand." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-minimal interactive-target">
+                <span>Direct WhatsApp Concierge →</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inline Direct-to-WhatsApp Contact Form -->
+        <div class="contact-form-card">
+          <div class="contact-form-header">
+            <span class="meta" style="color: var(--accent-vine);">Direct WhatsApp Inquiry</span>
+            <h3 class="titre contact-form-title">Start Your Project</h3>
+          </div>
+
+          <form id="inlineContactForm" class="whatsapp-inquiry-form" data-wa-form="inline">
+            <div class="form-neuv-group">
+              <div class="form-plan-status-bar">
+                <span class="meta">Interested Retainer:</span>
+                <span class="form-selected-plan-badge" data-plan-badge>Growth — ₹7,999/month</span>
+              </div>
+
+              <label class="form-neuv-label">Select Monthly Plan / Service</label>
+              <div class="form-neuv-pills form-plan-pills">
+                <label class="neuv-pill interactive-target" data-plan-value="Starter — ₹4,999/month">
+                  <input type="radio" name="inlineSelectedPlan" value="Starter — ₹4,999/month" />
+                  <span>Starter (₹4,999/mo)</span>
+                </label>
+                <label class="neuv-pill interactive-target selected" data-plan-value="Growth — ₹7,999/month">
+                  <input type="radio" name="inlineSelectedPlan" value="Growth — ₹7,999/month" checked />
+                  <span>Growth (₹7,999/mo)</span>
+                </label>
+                <label class="neuv-pill interactive-target" data-plan-value="Premium — ₹17,999/month">
+                  <input type="radio" name="inlineSelectedPlan" value="Premium — ₹17,999/month" />
+                  <span>Premium (₹17,999/mo)</span>
+                </label>
+                <label class="neuv-pill interactive-target" data-plan-value="On-Site Model Shoot — ₹3,500–₹5,000/session">
+                  <input type="radio" name="inlineSelectedPlan" value="On-Site Model Shoot — ₹3,500–₹5,000/session" />
+                  <span>Model Shoot (₹3.5k–₹5k)</span>
+                </label>
+                <label class="neuv-pill interactive-target" data-plan-value="Custom Retainer / Bespoke">
+                  <input type="radio" name="inlineSelectedPlan" value="Custom Retainer / Bespoke" />
+                  <span>Custom Retainer</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row-2col">
+              <div class="form-neuv-group">
+                <label class="form-neuv-label" for="inlineClientName">Your Name *</label>
+                <input type="text" id="inlineClientName" name="clientName" class="form-neuv-input" placeholder="e.g. Rahul Sharma" required />
+              </div>
+
+              <div class="form-neuv-group">
+                <label class="form-neuv-label" for="inlineClientPhone">WhatsApp / Phone *</label>
+                <input type="tel" id="inlineClientPhone" name="clientPhone" class="form-neuv-input" placeholder="+91 98765 43210" required />
+              </div>
+            </div>
+
+            <div class="form-neuv-group">
+              <label class="form-neuv-label" for="inlineClientEmail">Email Address *</label>
+              <input type="email" id="inlineClientEmail" name="clientEmail" class="form-neuv-input" placeholder="e.g. rahul@brand.com" required />
+            </div>
+
+            <div class="form-neuv-group">
+              <label class="form-neuv-label">Included / Key Focus Services</label>
+              <div class="form-neuv-pills">
+                <label class="neuv-pill interactive-target selected">
+                  <input type="checkbox" name="services" value="Content Creation" checked />
+                  <span>Content Creation</span>
+                </label>
+                <label class="neuv-pill interactive-target selected">
+                  <input type="checkbox" name="services" value="Social Management" checked />
+                  <span>Social Management</span>
+                </label>
+                <label class="neuv-pill interactive-target">
+                  <input type="checkbox" name="services" value="Reels & Video" />
+                  <span>Reels &amp; Video</span>
+                </label>
+                <label class="neuv-pill interactive-target">
+                  <input type="checkbox" name="services" value="Paid Media Ads" />
+                  <span>Paid Media Ads</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-neuv-group">
+              <label class="form-neuv-label" for="inlineBrandDetails">Tell Us About Your Brand</label>
+              <textarea id="inlineBrandDetails" name="brandDetails" class="form-neuv-input" rows="3" placeholder="Share your Instagram handle and your primary goals..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-form-neuv-submit interactive-target">
+              Submit &amp; Open WhatsApp Directly →
+            </button>
+
+            <p class="meta form-privacy-note">
+              Opens WhatsApp immediately with your pre-filled inquiry. Replies within 24 hours.
+            </p>
+          </form>
         </div>
       </div>
 
@@ -579,14 +720,21 @@
         </div>
         <div class="footer-legal-links">
           <span>© 2026</span>
-          <a href="#about" class="interactive-target">About</a>
+          <a href="#work" class="interactive-target">Work</a>
           <a href="#services" class="interactive-target">Disciplines</a>
           <a href="#pricing" class="interactive-target">Pricing</a>
+          <a href="#about" class="interactive-target">About</a>
           <a href="#contact" class="interactive-target">Contact</a>
         </div>
       </footer>
     </section>
   </main>
+
+  <!-- Floating Direct WhatsApp Concierge Pill (Mobile & Desktop) -->
+  <a href="https://wa.me/919876543210?text=Hi%20The%20Social%20Vine%20Studio!%20I'd%20like%20to%20inquire%20about%20growing%20my%20brand." target="_blank" rel="noopener noreferrer" class="floating-wa-btn interactive-target" id="floatingWaBtn" aria-label="Chat directly on WhatsApp">
+    <span class="wa-pulse-dot" aria-hidden="true"></span>
+    <span class="floating-wa-text">WhatsApp Concierge</span>
+  </a>
 
   <!-- ==========================================================================
        DISCOVERY CONSULTATION MODAL
@@ -595,15 +743,15 @@
     <div class="modal-content-luxury">
       <button type="button" class="modal-close-neuv interactive-target" id="closeBookingModalBtn" aria-label="Close consultation modal">✕</button>
 
-      <p class="meta" style="margin-bottom: 0.5rem; color: var(--accent-vine);">Discovery Consultation</p>
-      <h3 class="titre" id="modalBookingTitle" style="font-size: 2.2rem; margin-bottom: 1.5rem;">Let's Grow Your Brand</h3>
+      <p class="meta modal-kicker" style="color: var(--accent-vine);">Discovery Consultation</p>
+      <h3 class="titre modal-heading" id="modalBookingTitle">Let's Grow Your Brand</h3>
 
-      <form id="luxuryInquiryForm">
+      <form id="luxuryInquiryForm" class="whatsapp-inquiry-form" data-wa-form="modal">
         <!-- Retainer / Package Selection Status & Pills -->
         <div class="form-neuv-group">
           <div class="form-plan-status-bar" id="formPlanStatusBar">
             <span class="meta">Interested Retainer:</span>
-            <span class="form-selected-plan-badge" id="formPlanBadgeText">Growth — ₹7,999/month</span>
+            <span class="form-selected-plan-badge" id="formPlanBadgeText" data-plan-badge>Growth — ₹7,999/month</span>
           </div>
 
           <label class="form-neuv-label">Selected Monthly Plan / Service</label>
@@ -633,17 +781,17 @@
 
         <div class="form-neuv-group">
           <label class="form-neuv-label" for="clientName">Your Name *</label>
-          <input type="text" id="clientName" class="form-neuv-input" placeholder="e.g. Rahul Sharma" required />
+          <input type="text" id="clientName" name="clientName" class="form-neuv-input" placeholder="e.g. Rahul Sharma" required />
         </div>
 
         <div class="form-neuv-group">
           <label class="form-neuv-label" for="clientEmail">Email Address *</label>
-          <input type="email" id="clientEmail" class="form-neuv-input" placeholder="e.g. rahul@brand.com" required />
+          <input type="email" id="clientEmail" name="clientEmail" class="form-neuv-input" placeholder="e.g. rahul@brand.com" required />
         </div>
 
         <div class="form-neuv-group">
           <label class="form-neuv-label" for="clientPhone">WhatsApp / Phone Number *</label>
-          <input type="tel" id="clientPhone" class="form-neuv-input" placeholder="+91 98765 43210" required />
+          <input type="tel" id="clientPhone" name="clientPhone" class="form-neuv-input" placeholder="+91 98765 43210" required />
         </div>
 
         <div class="form-neuv-group">
@@ -669,16 +817,16 @@
         </div>
 
         <div class="form-neuv-group">
-          <label class="form-neuv-label" for="brandDetails">Tell Us About Your Brand *</label>
-          <textarea id="brandDetails" class="form-neuv-input" rows="3" placeholder="Share your Instagram handle and your primary goals..."></textarea>
+          <label class="form-neuv-label" for="brandDetails">Tell Us About Your Brand</label>
+          <textarea id="brandDetails" name="brandDetails" class="form-neuv-input" rows="3" placeholder="Share your Instagram handle and your primary goals..."></textarea>
         </div>
 
         <button type="submit" class="btn-form-neuv-submit interactive-target">
-          Submit Consultation Request →
+          Submit &amp; Open WhatsApp Directly →
         </button>
 
-        <p class="meta" style="text-align: center; margin-top: 1rem; font-size: 0.7rem;">
-          We respect your privacy. Inquiries receive replies within 24 business hours.
+        <p class="meta form-privacy-note">
+          Opens WhatsApp immediately with your pre-filled consultation request.
         </p>
       </form>
     </div>
@@ -691,25 +839,25 @@
     <div class="modal-content-luxury">
       <button type="button" class="modal-close-neuv interactive-target" id="closeProjectModalBtn" aria-label="Close project modal">✕</button>
 
-      <p class="meta" id="modalProjectCategory" style="margin-bottom: 0.5rem; color: var(--accent-vine);">Case Study</p>
-      <h3 class="titre" id="modalProjectTitle" style="font-size: 2.2rem; margin-bottom: 1.5rem;">Project Title</h3>
+      <p class="meta modal-kicker" id="modalProjectCategory" style="color: var(--accent-vine);">Case Study</p>
+      <h3 class="titre modal-heading" id="modalProjectTitle">Project Title</h3>
 
-      <div style="aspect-ratio: 16/9; background: var(--cadre-vide); border-radius: 6px; overflow: hidden; margin-bottom: 1.75rem;">
-        <img id="modalProjectImage" src="" alt="Project Preview" style="width: 100%; height: 100%; object-fit: cover;" />
+      <div class="modal-project-preview">
+        <img id="modalProjectImage" src="" alt="Project Preview" />
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; border-top: 1px solid var(--trait); border-bottom: 1px solid var(--trait); padding: 1.25rem 0; margin-bottom: 1.5rem;">
+      <div class="modal-project-metrics">
         <div>
           <span class="meta">Key Performance Metric</span>
-          <p id="modalProjectMetric" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; margin-top: 0.25rem; color: var(--texte);">+185% Growth</p>
+          <p id="modalProjectMetric" class="modal-metric-val">+185% Growth</p>
         </div>
         <div>
           <span class="meta">Campaign Scope</span>
-          <p id="modalProjectScope" style="font-size: 0.9rem; margin-top: 0.25rem; color: var(--doux);">Reels Production, Paid Ads, Visual Direction</p>
+          <p id="modalProjectScope" class="modal-scope-val">Reels Production, Paid Ads, Visual Direction</p>
         </div>
       </div>
 
-      <p id="modalProjectDescription" style="font-size: 0.95rem; line-height: 1.6; color: var(--doux); margin-bottom: 2rem;">
+      <p id="modalProjectDescription" class="modal-project-desc">
         Full campaign breakdown and organic content direction delivered by The Social Vine Studio.
       </p>
 

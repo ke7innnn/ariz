@@ -7,6 +7,7 @@ import gsap from 'gsap';
 document.addEventListener('DOMContentLoaded', () => {
   initNeuvCursor();
   initThemeToggle();
+  initMobileNavigation();
   initHeroIntro();
   initHeroScrollAnimation();
   initHorizontalGallery();
@@ -17,6 +18,70 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormPills();
   initConsultationForm();
 });
+
+/* --------------------------------------------------------------------------
+   Mobile Navigation Drawer (Hamburger Toggle & Smooth Section Jumps)
+   -------------------------------------------------------------------------- */
+function initMobileNavigation() {
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  const menuLabel = document.getElementById('mobileMenuLabel');
+  const drawer = document.getElementById('mobileNavDrawer');
+  const drawerBookBtn = document.getElementById('mobileDrawerBookBtn');
+
+  if (!menuBtn || !drawer) return;
+
+  function closeDrawer() {
+    menuBtn.classList.remove('is-active');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    if (menuLabel) menuLabel.textContent = 'Menu';
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (!document.querySelector('.modal-backdrop.open')) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  function toggleDrawer() {
+    const isOpen = drawer.classList.contains('open');
+    if (isOpen) {
+      closeDrawer();
+    } else {
+      menuBtn.classList.add('is-active');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      if (menuLabel) menuLabel.textContent = 'Close';
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  menuBtn.addEventListener('click', toggleDrawer);
+
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      closeDrawer();
+    });
+  });
+
+  if (drawerBookBtn) {
+    drawerBookBtn.addEventListener('click', () => {
+      closeDrawer();
+      openBookingWithPlan('Growth', '₹7,999/month');
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && drawer.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
+}
 
 /* --------------------------------------------------------------------------
    0. Cinematic Hero Opening Sequence (neuv.fr Architectural Choreo)
@@ -310,18 +375,22 @@ function initHorizontalGallery() {
   let maxShift = 0;
 
   function updateDimensions() {
-    sceneTop = scene.offsetTop;
+    sceneTop = scene.getBoundingClientRect().top + window.scrollY;
     sceneHeight = scene.offsetHeight;
     windowHeight = window.innerHeight;
     maxScroll = Math.max(1, sceneHeight - windowHeight);
     pisteWidth = piste.scrollWidth;
     windowWidth = window.innerWidth;
     // Ensure track shifts enough so the last item is framed with comfortable margin
-    const endMargin = windowWidth < 768 ? 40 : 80;
+    const endMargin = windowWidth < 768 ? 32 : 80;
     maxShift = Math.max(0, pisteWidth - windowWidth + endMargin);
   }
 
   updateDimensions();
+  window.addEventListener('load', () => {
+    updateDimensions();
+    onScroll();
+  });
 
   let targetProgress = 0;
   let currentProgress = 0;
@@ -804,6 +873,23 @@ function initPricingAnimations() {
 /* --------------------------------------------------------------------------
    6. Form Pill Selections (Radio & Checkbox)
    -------------------------------------------------------------------------- */
+function syncFormPills(form) {
+  if (!form) return;
+  const pills = form.querySelectorAll('.neuv-pill');
+  pills.forEach(pill => {
+    const input = pill.querySelector('input');
+    if (input) {
+      pill.classList.toggle('selected', input.checked);
+    }
+  });
+
+  const checkedRadio = form.querySelector('input[type="radio"]:checked');
+  const badgeText = form.querySelector('[data-plan-badge]');
+  if (checkedRadio && badgeText) {
+    badgeText.textContent = checkedRadio.value;
+  }
+}
+
 function initFormPills() {
   const pills = document.querySelectorAll('.neuv-pill');
 
@@ -811,20 +897,17 @@ function initFormPills() {
     const input = pill.querySelector('input');
     if (!input) return;
 
-    pill.addEventListener('click', () => {
+    input.addEventListener('change', () => {
+      const parentForm = pill.closest('form') || document;
       if (input.type === 'radio') {
         const groupName = input.name;
-        document.querySelectorAll(`input[name="${groupName}"]`).forEach(radio => {
-          radio.closest('.neuv-pill').classList.remove('selected');
+        parentForm.querySelectorAll(`input[name="${groupName}"]`).forEach(radio => {
+          radio.closest('.neuv-pill')?.classList.toggle('selected', radio.checked);
         });
-        pill.classList.add('selected');
 
-        // Dynamically reflect selection in status badge
-        if (groupName === 'selectedPlan') {
-          const badgeText = document.getElementById('formPlanBadgeText');
-          if (badgeText) {
-            badgeText.textContent = input.value;
-          }
+        const badgeText = parentForm.querySelector('[data-plan-badge]');
+        if (badgeText) {
+          badgeText.textContent = input.value;
         }
       } else if (input.type === 'checkbox') {
         pill.classList.toggle('selected', input.checked);
@@ -834,49 +917,77 @@ function initFormPills() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Consultation Form Submission & WhatsApp Forwarding
+   7. Consultation Form Submission & Direct WhatsApp Forwarding
    -------------------------------------------------------------------------- */
+const WHATSAPP_NUMBER = '919876543210';
+
 function initConsultationForm() {
-  const form = document.getElementById('luxuryInquiryForm');
-  if (!form) return;
+  const forms = document.querySelectorAll('.whatsapp-inquiry-form, #luxuryInquiryForm, #inlineContactForm');
+  const uniqueForms = Array.from(new Set(forms));
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  uniqueForms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    const name = document.getElementById('clientName').value.trim();
-    const email = document.getElementById('clientEmail').value.trim();
-    const phone = document.getElementById('clientPhone').value.trim();
-    const details = document.getElementById('brandDetails').value.trim();
+      const nameInput = form.querySelector('input[name="clientName"], #clientName');
+      const emailInput = form.querySelector('input[name="clientEmail"], #clientEmail');
+      const phoneInput = form.querySelector('input[name="clientPhone"], #clientPhone');
+      const detailsInput = form.querySelector('textarea[name="brandDetails"], #brandDetails');
 
-    const selectedPlan = form.querySelector('input[name="selectedPlan"]:checked')?.value || 'Growth — ₹7,999/month';
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const phone = phoneInput ? phoneInput.value.trim() : '';
+      const details = detailsInput ? detailsInput.value.trim() : '';
 
-    const selectedServices = Array.from(form.querySelectorAll('input[name="services"]:checked'))
-      .map(cb => cb.value)
-      .join(', ') || 'All Focus Services';
+      const selectedPlan = form.querySelector('input[type="radio"]:checked')?.value || 'Growth — ₹7,999/month';
 
-    // WhatsApp Message Format with exact Plan details
-    const message = `Hello The Social Vine Studio!%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Interested Retainer:* ${encodeURIComponent(selectedPlan)}%0A*Services:* ${encodeURIComponent(selectedServices)}%0A*Brand Goals:* ${encodeURIComponent(details)}`;
+      const selectedServices = Array.from(form.querySelectorAll('input[name="services"]:checked'))
+        .map(cb => cb.value)
+        .join(', ') || 'All Focus Services';
 
-    // Success State
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Opening WhatsApp Concierge...';
-    submitBtn.style.backgroundColor = 'var(--accent-vine)';
+      const messageLines = [
+        'Hello The Social Vine Studio!',
+        '',
+        `*Name:* ${name}`,
+        `*Phone / WhatsApp:* ${phone}`,
+        `*Email:* ${email}`,
+        `*Interested Retainer:* ${selectedPlan}`,
+        `*Services:* ${selectedServices}`,
+        `*Brand Goals:* ${details || 'Let us discuss my brand goals'}`
+      ];
 
-    setTimeout(() => {
-      window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
-      submitBtn.textContent = 'Consultation Request Sent ✓';
-      setTimeout(() => {
-        const modal = document.getElementById('bookingModal');
-        if (modal) {
-          modal.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-        submitBtn.textContent = originalText;
-        submitBtn.style.backgroundColor = '';
-        form.reset();
-      }, 1500);
-    }, 600);
+      const encodedMessage = encodeURIComponent(messageLines.join('\n'));
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+      // Open WhatsApp window directly & synchronously on submit so popup blockers never block it
+      const waWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      if (!waWindow) {
+        window.location.href = whatsappUrl;
+      }
+
+      // Immediate UI feedback & clean reset
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'WhatsApp Concierge Opened ✓';
+        submitBtn.style.backgroundColor = 'var(--accent-vine)';
+        submitBtn.style.color = '#ffffff';
+
+        setTimeout(() => {
+          const modal = form.closest('.modal-backdrop');
+          if (modal && modal.classList.contains('open')) {
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          }
+          submitBtn.textContent = originalText;
+          submitBtn.style.backgroundColor = '';
+          submitBtn.style.color = '';
+          form.reset();
+          syncFormPills(form);
+        }, 1200);
+      }
+    });
   });
 }
 
@@ -911,14 +1022,15 @@ function initHeroScrollAnimation() {
     coteEls = [];
 
     const isMobile = window.innerWidth < 768;
-    const marge = isMobile ? 20 : 32;
+    const marge = isMobile ? 16 : 32;
     const larg = window.innerWidth - 2 * marge;
+    const colCount = isMobile ? 4 : 12;
 
-    // 13 vertical column guidelines
-    for (let i = 0; i <= 12; i++) {
+    // Vertical column guidelines (4 columns on mobile, 12 on desktop)
+    for (let i = 0; i <= colCount; i++) {
       const v = document.createElement('i');
-      v.className = (i === 0 || i === 12) ? 'v bord' : 'v';
-      v.style.left = `${marge + (larg * i) / 12}px`;
+      v.className = (i === 0 || i === colCount) ? 'v bord' : 'v';
+      v.style.left = `${marge + (larg * i) / colCount}px`;
       planGrid.appendChild(v);
       vLines.push(v);
     }
@@ -934,9 +1046,9 @@ function initHeroScrollAnimation() {
 
     // Blueprint annotations (cotes)
     const annotations = [
-      { text: 'COL 01', x: `${marge + 8}px`, y: 'calc(14% + 8px)' },
-      { text: 'COL 12', x: `${window.innerWidth - marge - 64}px`, y: 'calc(14% + 8px)' },
-      { text: `GRID · 12 × ${Math.round(larg / 12)} PX`, x: `${marge + 8}px`, y: 'calc(86% + 8px)' }
+      { text: 'COL 01', x: `${marge + 6}px`, y: 'calc(14% + 8px)' },
+      { text: isMobile ? 'COL 04' : 'COL 12', x: `${window.innerWidth - marge - 58}px`, y: 'calc(14% + 8px)' },
+      { text: `GRID · ${colCount} × ${Math.round(larg / colCount)} PX`, x: `${marge + 6}px`, y: 'calc(86% + 8px)' }
     ];
 
     annotations.forEach(({ text, x, y }) => {
@@ -988,7 +1100,8 @@ function initHeroScrollAnimation() {
 
     const p = currentProgress;
     const isMobile = window.innerWidth < 768;
-    const shift = isMobile ? window.innerWidth * 0.08 : window.innerWidth * 0.15;
+    const shift = isMobile ? window.innerWidth * 0.035 : window.innerWidth * 0.15;
+    const wdthSpan = isMobile ? 7 : 18;
 
     // A. Animate Vertical Guidelines (drawn downwards)
     vLines.forEach((v, i) => {
@@ -1015,7 +1128,7 @@ function initHeroScrollAnimation() {
     motDirection.style.transform = `translate3d(${(-p * shift).toFixed(1)}px, 0, 0)`;
 
     // E. Variable Font Width & 3D Perspective Depth
-    heroStatement.style.fontVariationSettings = `'wdth' ${(62 + p * 18).toFixed(1)}`;
+    heroStatement.style.fontVariationSettings = `'wdth' ${(62 + p * wdthSpan).toFixed(1)}`;
     heroStatement.style.transform = `perspective(1100px) translate3d(0, ${(-p * 32).toFixed(1)}px, ${(-p * 140).toFixed(1)}px)`;
 
     // F. Fade Out Hero Meta, Indicator, and Scroll Cue
