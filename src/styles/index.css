@@ -2296,6 +2296,7 @@ html.intro-active body {
 }
 
 .neuv-pill {
+  position: relative;
   padding: 0.45rem 0.9rem;
   border-radius: 9999px;
   border: 1px solid var(--trait);
@@ -2310,7 +2311,15 @@ html.intro-active body {
 }
 
 .neuv-pill input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  pointer-events: none;
 }
 
 .neuv-pill:hover {

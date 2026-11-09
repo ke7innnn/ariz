@@ -4,7 +4,7 @@ import gsap from 'gsap';
  * THE SOCIAL VINE STUDIO — NEUV.FR LUXURY ENGINE & INTERACTIVE LOGIC
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
   initNeuvCursor();
   initThemeToggle();
   initMobileNavigation();
@@ -17,7 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initPricingAnimations();
   initFormPills();
   initConsultationForm();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
 /* --------------------------------------------------------------------------
    Mobile Navigation Drawer (Hamburger Toggle & Smooth Section Jumps)
@@ -1101,27 +1107,32 @@ function syncFormPills(form) {
 }
 
 function initFormPills() {
-  const pills = document.querySelectorAll('.neuv-pill');
+  const forms = document.querySelectorAll('form.whatsapp-inquiry-form, #luxuryInquiryForm, #inlineContactForm');
+  forms.forEach(form => {
+    syncFormPills(form);
 
-  pills.forEach(pill => {
-    const input = pill.querySelector('input');
-    if (!input) return;
-
-    input.addEventListener('change', () => {
-      const parentForm = pill.closest('form') || document;
-      if (input.type === 'radio') {
-        const groupName = input.name;
-        parentForm.querySelectorAll(`input[name="${groupName}"]`).forEach(radio => {
-          radio.closest('.neuv-pill')?.classList.toggle('selected', radio.checked);
-        });
-
-        const badgeText = parentForm.querySelector('[data-plan-badge]');
-        if (badgeText) {
-          badgeText.textContent = input.value;
-        }
-      } else if (input.type === 'checkbox') {
-        pill.classList.toggle('selected', input.checked);
+    form.addEventListener('change', (e) => {
+      const target = e.target;
+      if (target && (target.type === 'radio' || target.type === 'checkbox')) {
+        syncFormPills(form);
       }
+    });
+
+    const pills = form.querySelectorAll('.neuv-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        const input = pill.querySelector('input');
+        if (!input) return;
+
+        if (e.target !== input) {
+          if (input.type === 'radio') {
+            input.checked = true;
+            syncFormPills(form);
+          } else if (input.type === 'checkbox') {
+            setTimeout(() => syncFormPills(form), 10);
+          }
+        }
+      });
     });
   });
 }
@@ -1131,6 +1142,44 @@ function initFormPills() {
    -------------------------------------------------------------------------- */
 const WHATSAPP_NUMBER = '918446190244';
 
+function buildWhatsAppMessage({ name, phone, email, brand, plan, services, details }) {
+  const lines = [
+    '✨ *New Consultation Inquiry — The Social Vine Studio*',
+    '━━━━━━━━━━━━━━━━━━━━',
+    `👤 *Name:* ${name || 'Not provided'}`,
+    `📱 *Phone / WhatsApp:* ${phone || 'Not provided'}`,
+    `✉️ *Email:* ${email || 'Not provided'}`
+  ];
+
+  if (brand) {
+    lines.push(`🏷️ *Brand / Instagram:* ${brand}`);
+  }
+
+  if (plan) {
+    lines.push(`📦 *Interested Retainer:* ${plan}`);
+  }
+
+  if (services && services.length > 0) {
+    lines.push(`🎯 *Focus Services:* ${services.join(', ')}`);
+  } else {
+    lines.push('🎯 *Focus Services:* Bespoke discussion');
+  }
+
+  if (details) {
+    lines.push('━━━━━━━━━━━━━━━━━━━━');
+    lines.push('📝 *Brand Details & Goals:*');
+    lines.push(details);
+  } else {
+    lines.push('━━━━━━━━━━━━━━━━━━━━');
+    lines.push('💬 *Note:* Ready to discuss growth strategy and tailored packages.');
+  }
+
+  lines.push('━━━━━━━━━━━━━━━━━━━━');
+  lines.push('📍 Sent via thesocialvine.studio');
+
+  return lines.join('\n');
+}
+
 function initConsultationForm() {
   const forms = document.querySelectorAll('.whatsapp-inquiry-form, #luxuryInquiryForm, #inlineContactForm');
   const uniqueForms = Array.from(new Set(forms));
@@ -1139,47 +1188,47 @@ function initConsultationForm() {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const nameInput = form.querySelector('input[name="clientName"], #clientName');
-      const emailInput = form.querySelector('input[name="clientEmail"], #clientEmail');
-      const phoneInput = form.querySelector('input[name="clientPhone"], #clientPhone');
-      const detailsInput = form.querySelector('textarea[name="brandDetails"], #brandDetails');
+      // Read every single field filled in the form
+      const nameInput = form.querySelector('input[name="clientName"], #clientName, #inlineClientName');
+      const phoneInput = form.querySelector('input[name="clientPhone"], #clientPhone, #inlineClientPhone');
+      const emailInput = form.querySelector('input[name="clientEmail"], #clientEmail, #inlineClientEmail');
+      const brandInput = form.querySelector('input[name="brandName"], #brandName, #modalBrandName, #inlineBrandName');
+      const detailsInput = form.querySelector('textarea[name="brandDetails"], #brandDetails, #inlineBrandDetails');
 
       const name = nameInput ? nameInput.value.trim() : '';
-      const email = emailInput ? emailInput.value.trim() : '';
       const phone = phoneInput ? phoneInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const brand = brandInput ? brandInput.value.trim() : '';
       const details = detailsInput ? detailsInput.value.trim() : '';
 
-      const selectedPlan = form.querySelector('input[type="radio"]:checked')?.value || 'Growth — ₹9,999/month';
+      // Plan selection from radio or badge
+      const checkedRadio = form.querySelector('input[type="radio"]:checked');
+      const badgeText = form.querySelector('[data-plan-badge]');
+      const plan = checkedRadio ? checkedRadio.value : (badgeText ? badgeText.textContent.trim() : 'Growth — ₹9,999/month');
 
-      const selectedServices = Array.from(form.querySelectorAll('input[name="services"]:checked'))
-        .map(cb => cb.value)
-        .join(', ') || 'All Focus Services';
+      // Services selection from checkboxes
+      const checkedBoxes = Array.from(form.querySelectorAll('input[name="services"]:checked'));
+      const services = checkedBoxes.map(cb => cb.value);
 
-      const messageLines = [
-        'Hello The Social Vine Studio!',
-        '',
-        `*Name:* ${name}`,
-        `*Phone / WhatsApp:* ${phone}`,
-        `*Email:* ${email}`,
-        `*Interested Retainer:* ${selectedPlan}`,
-        `*Services:* ${selectedServices}`,
-        `*Brand Goals:* ${details || 'Let us discuss my brand goals'}`
-      ];
+      const message = buildWhatsAppMessage({ name, phone, email, brand, plan, services, details });
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-      const encodedMessage = encodeURIComponent(messageLines.join('\n'));
-      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-
-      // Open WhatsApp window directly & synchronously on submit so popup blockers never block it
-      const waWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      if (!waWindow) {
+      // Open WhatsApp directly without popup blockers
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
         window.location.href = whatsappUrl;
+      } else {
+        const waWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        if (!waWindow || waWindow.closed || typeof waWindow.closed === 'undefined') {
+          window.location.href = whatsappUrl;
+        }
       }
 
-      // Immediate UI feedback & clean reset
+      // Visual feedback on the submit button
       const submitBtn = form.querySelector('button[type="submit"]');
       if (submitBtn) {
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'WhatsApp Concierge Opened ✓';
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'WhatsApp Concierge Opened ✓';
         submitBtn.style.backgroundColor = 'var(--accent-vine)';
         submitBtn.style.color = '#ffffff';
 
@@ -1190,12 +1239,46 @@ function initConsultationForm() {
             modal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
           }
-          submitBtn.textContent = originalText;
+          submitBtn.innerHTML = originalText;
           submitBtn.style.backgroundColor = '';
           submitBtn.style.color = '';
           form.reset();
           syncFormPills(form);
         }, 1200);
+      }
+    });
+  });
+
+  // Dynamic context for direct WhatsApp concierge buttons on the page
+  const directWaButtons = document.querySelectorAll('.btn-whatsapp-minimal');
+  directWaButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const inlineForm = document.getElementById('inlineContactForm');
+      if (!inlineForm) return;
+
+      const name = inlineForm.querySelector('input[name="clientName"]')?.value.trim();
+      const phone = inlineForm.querySelector('input[name="clientPhone"]')?.value.trim();
+      const email = inlineForm.querySelector('input[name="clientEmail"]')?.value.trim();
+      const brand = inlineForm.querySelector('input[name="brandName"]')?.value.trim();
+      const details = inlineForm.querySelector('textarea[name="brandDetails"]')?.value.trim();
+
+      if (name || phone || email || brand || details) {
+        e.preventDefault();
+        const checkedRadio = inlineForm.querySelector('input[type="radio"]:checked');
+        const badgeText = inlineForm.querySelector('[data-plan-badge]');
+        const plan = checkedRadio ? checkedRadio.value : (badgeText ? badgeText.textContent.trim() : 'Growth — ₹9,999/month');
+        const checkedBoxes = Array.from(inlineForm.querySelectorAll('input[name="services"]:checked'));
+        const services = checkedBoxes.map(cb => cb.value);
+
+        const message = buildWhatsAppMessage({ name, phone, email, brand, plan, services, details });
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (isMobile) {
+          window.location.href = whatsappUrl;
+        } else {
+          window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
       }
     });
   });
