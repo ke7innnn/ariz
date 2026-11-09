@@ -611,6 +611,51 @@ function initHorizontalGallery() {
 /* --------------------------------------------------------------------------
    4. Project Showcase Modals & Data Mapping
    -------------------------------------------------------------------------- */
+const AUTHENTIC_VISION_SLIDES = [
+  {
+    src: '/assets/images/authentic-vision/slide_1.jpg',
+    thumb: '/assets/images/authentic-vision/thumb_1.jpg',
+    caption: 'See Different. Live Bolder.',
+    sub: 'Gucci Eyewear Collection',
+    counter: '01 / 06'
+  },
+  {
+    src: '/assets/images/authentic-vision/slide_2.jpg',
+    thumb: '/assets/images/authentic-vision/thumb_2.jpg',
+    caption: 'More Than Just Eyewear.',
+    sub: 'Signature Boutique Framing',
+    counter: '02 / 06'
+  },
+  {
+    src: '/assets/images/authentic-vision/slide_3.jpg',
+    thumb: '/assets/images/authentic-vision/thumb_3.jpg',
+    caption: 'Confidence Looks Good On You.',
+    sub: 'Gucci Luxury Display',
+    counter: '03 / 06'
+  },
+  {
+    src: '/assets/images/authentic-vision/slide_4.jpg',
+    thumb: '/assets/images/authentic-vision/thumb_4.jpg',
+    caption: 'Timeless Style. Modern You.',
+    sub: 'Montblanc Collection',
+    counter: '04 / 06'
+  },
+  {
+    src: '/assets/images/authentic-vision/slide_5.jpg',
+    thumb: '/assets/images/authentic-vision/thumb_5.jpg',
+    caption: 'Premium Craftsmanship. Superior Vision.',
+    sub: 'Montblanc Designer Lounge',
+    counter: '05 / 06'
+  },
+  {
+    src: '/assets/images/authentic-vision/slide_6.jpg',
+    thumb: '/assets/images/authentic-vision/thumb_6.jpg',
+    caption: 'Elevate Your Look.',
+    sub: 'Dolce & Gabbana Finishing Touch',
+    counter: '06 / 06'
+  }
+];
+
 const PROJECT_DATA = {
   koffie: {
     title: 'Koffie Culture Roasters',
@@ -628,13 +673,24 @@ const PROJECT_DATA = {
     image: '/assets/images/d2c-skincare.jpg',
     description: 'A complete organic and paid social scaling program. Crafted ultra-satisfying botanical skincare routines, UGC creator funnels, and Meta performance ads delivering record revenue months.'
   },
+  authentic: {
+    title: 'Authentic Vision & Shades',
+    category: 'Luxury Designer Eyewear & Boutique Retail',
+    metric: '4.8x Engagement · 850K+ Reach',
+    scope: 'On-Site Model Direction, In-Store Campaign, Editorial Lookbook',
+    image: '/assets/images/authentic-vision/slide_1.jpg',
+    description: 'A cinematic in-store and lookbook production for premier eyewear boutique Authentic Vision & Shades. Highlighting luxury collections from Gucci, Montblanc, and Dolce & Gabbana with intentional fashion direction, warm editorial lighting, and scroll-stopping Instagram storytelling.',
+    slides: AUTHENTIC_VISION_SLIDES
+  },
+  // Backwards-compatibility alias for previous mock client
   verve: {
-    title: 'Verve Urban Apparel',
-    category: 'High-Street Luxury Fashion',
-    metric: 'Sold Out in 48h · 840K Impressions',
-    scope: 'Collection Teasers, Lookbook Direction, Carousel Campaigns',
-    image: '/assets/images/portfolio-fashion.jpg',
-    description: 'Direction of high-fashion collection drops. Engineered cinematic street style reels and influencer seed campaigns leading to immediate sellouts of limited-edition apparel runs.'
+    title: 'Authentic Vision & Shades',
+    category: 'Luxury Designer Eyewear & Boutique Retail',
+    metric: '4.8x Engagement · 850K+ Reach',
+    scope: 'On-Site Model Direction, In-Store Campaign, Editorial Lookbook',
+    image: '/assets/images/authentic-vision/slide_1.jpg',
+    description: 'A cinematic in-store and lookbook production for premier eyewear boutique Authentic Vision & Shades. Highlighting luxury collections from Gucci, Montblanc, and Dolce & Gabbana with intentional fashion direction, warm editorial lighting, and scroll-stopping Instagram storytelling.',
+    slides: AUTHENTIC_VISION_SLIDES
   },
   forma: {
     title: 'Studio Forma Architecture',
@@ -661,11 +717,65 @@ function initProjectModals() {
   const modalCategory = document.getElementById('modalProjectCategory');
   const modalMetric = document.getElementById('modalProjectMetric');
   const modalScope = document.getElementById('modalProjectScope');
-  const modalImage = document.getElementById('modalProjectImage');
   const modalDesc = document.getElementById('modalProjectDescription');
   const modalInquireBtn = document.getElementById('modalProjectInquireBtn');
 
+  // Lookbook elements
+  const modalGalleryContainer = document.getElementById('modalGalleryContainer');
+  const modalGalleryStage = document.getElementById('modalGalleryStage');
+  const modalImage = document.getElementById('modalProjectImage');
+  const modalGalleryNav = document.getElementById('modalGalleryNav');
+  const modalPrevSlideBtn = document.getElementById('modalPrevSlideBtn');
+  const modalNextSlideBtn = document.getElementById('modalNextSlideBtn');
+  const modalSlideCaption = document.getElementById('modalSlideCaption');
+  const modalSlideSub = document.getElementById('modalSlideSub');
+  const modalSlideCounter = document.getElementById('modalSlideCounter');
+  const modalThumbnailsStrip = document.getElementById('modalThumbnailsStrip');
+
   if (!modal) return;
+
+  let activeProjectSlides = null;
+  let currentSlideIdx = 0;
+  let isSlideTransitioning = false;
+
+  function goToSlide(targetIdx) {
+    if (!activeProjectSlides || activeProjectSlides.length <= 1) return;
+    if (targetIdx < 0) targetIdx = activeProjectSlides.length - 1;
+    if (targetIdx >= activeProjectSlides.length) targetIdx = 0;
+    if (targetIdx === currentSlideIdx && modalImage.src) return;
+    if (isSlideTransitioning) return;
+
+    isSlideTransitioning = true;
+    currentSlideIdx = targetIdx;
+    const slide = activeProjectSlides[currentSlideIdx];
+
+    if (modalImage) {
+      modalImage.classList.add('fade-out');
+      setTimeout(() => {
+        modalImage.src = slide.src;
+        modalImage.alt = `${slide.caption} — ${slide.sub}`;
+        if (modalSlideCaption) modalSlideCaption.textContent = slide.caption;
+        if (modalSlideSub) modalSlideSub.textContent = slide.sub;
+        if (modalSlideCounter) modalSlideCounter.textContent = slide.counter;
+
+        // Update active thumbnail
+        if (modalThumbnailsStrip) {
+          const thumbs = modalThumbnailsStrip.querySelectorAll('.modal-thumb-btn');
+          thumbs.forEach((tb, i) => {
+            if (i === currentSlideIdx) {
+              tb.classList.add('active');
+              tb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+              tb.classList.remove('active');
+            }
+          });
+        }
+
+        modalImage.classList.remove('fade-out');
+        isSlideTransitioning = false;
+      }, 160);
+    }
+  }
 
   // Open modal on project card click or discipline link click
   document.addEventListener('click', (e) => {
@@ -676,13 +786,52 @@ function initProjectModals() {
       const data = PROJECT_DATA[projectKey];
 
       if (data) {
-        modalTitle.textContent = data.title;
-        modalCategory.textContent = data.category;
-        modalMetric.textContent = data.metric;
-        modalScope.textContent = data.scope;
-        modalImage.src = data.image;
-        modalImage.alt = data.title;
-        modalDesc.textContent = data.description;
+        if (modalTitle) modalTitle.textContent = data.title;
+        if (modalCategory) modalCategory.textContent = data.category;
+        if (modalMetric) modalMetric.textContent = data.metric;
+        if (modalScope) modalScope.textContent = data.scope;
+        if (modalDesc) modalDesc.textContent = data.description;
+
+        // Check if project has multi-slide lookbook
+        if (data.slides && data.slides.length > 1) {
+          activeProjectSlides = data.slides;
+          currentSlideIdx = 0;
+
+          if (modalGalleryContainer) modalGalleryContainer.classList.add('has-lookbook');
+          if (modalGalleryNav) modalGalleryNav.style.display = 'flex';
+          if (modalThumbnailsStrip) {
+            modalThumbnailsStrip.style.display = 'flex';
+            modalThumbnailsStrip.innerHTML = activeProjectSlides.map((slide, i) => `
+              <button type="button" class="modal-thumb-btn interactive-target ${i === 0 ? 'active' : ''}" data-slide-index="${i}" aria-label="View frame ${i + 1}: ${slide.caption}">
+                <img src="${slide.thumb || slide.src}" alt="${slide.caption}" loading="lazy" />
+              </button>
+            `).join('');
+          }
+
+          const firstSlide = activeProjectSlides[0];
+          if (modalImage) {
+            modalImage.src = firstSlide.src;
+            modalImage.alt = `${firstSlide.caption} — ${firstSlide.sub}`;
+            modalImage.classList.remove('fade-out');
+          }
+          if (modalSlideCaption) modalSlideCaption.textContent = firstSlide.caption;
+          if (modalSlideSub) modalSlideSub.textContent = firstSlide.sub;
+          if (modalSlideCounter) modalSlideCounter.textContent = firstSlide.counter;
+        } else {
+          // Standard single-image project modal
+          activeProjectSlides = null;
+          if (modalGalleryContainer) modalGalleryContainer.classList.remove('has-lookbook');
+          if (modalGalleryNav) modalGalleryNav.style.display = 'none';
+          if (modalThumbnailsStrip) {
+            modalThumbnailsStrip.style.display = 'none';
+            modalThumbnailsStrip.innerHTML = '';
+          }
+          if (modalImage) {
+            modalImage.src = data.image;
+            modalImage.alt = data.title;
+            modalImage.classList.remove('fade-out');
+          }
+        }
 
         modal.classList.add('open');
         modal.setAttribute('aria-hidden', 'false');
@@ -690,6 +839,59 @@ function initProjectModals() {
       }
     }
   });
+
+  // Next / Prev buttons
+  if (modalPrevSlideBtn) {
+    modalPrevSlideBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(currentSlideIdx - 1);
+    });
+  }
+
+  if (modalNextSlideBtn) {
+    modalNextSlideBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(currentSlideIdx + 1);
+    });
+  }
+
+  // Thumbnail click
+  if (modalThumbnailsStrip) {
+    modalThumbnailsStrip.addEventListener('click', (e) => {
+      const thumbBtn = e.target.closest('.modal-thumb-btn');
+      if (thumbBtn && thumbBtn.dataset.slideIndex !== undefined) {
+        e.stopPropagation();
+        const idx = parseInt(thumbBtn.dataset.slideIndex, 10);
+        goToSlide(idx);
+      }
+    });
+  }
+
+  // Mobile swipe support on lookbook stage
+  if (modalGalleryStage) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    modalGalleryStage.addEventListener('touchstart', (e) => {
+      if (!activeProjectSlides || e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    modalGalleryStage.addEventListener('touchend', (e) => {
+      if (!activeProjectSlides || e.changedTouches.length !== 1) return;
+      const deltaX = e.changedTouches[0].clientX - touchStartX;
+      const deltaY = e.changedTouches[0].clientY - touchStartY;
+
+      if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+        if (deltaX < 0) {
+          goToSlide(currentSlideIdx + 1);
+        } else {
+          goToSlide(currentSlideIdx - 1);
+        }
+      }
+    }, { passive: true });
+  }
 
   // Close modal
   function closeModal() {
@@ -705,8 +907,16 @@ function initProjectModals() {
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) {
+    if (!modal.classList.contains('open')) return;
+
+    if (e.key === 'Escape') {
       closeModal();
+    } else if (activeProjectSlides) {
+      if (e.key === 'ArrowRight') {
+        goToSlide(currentSlideIdx + 1);
+      } else if (e.key === 'ArrowLeft') {
+        goToSlide(currentSlideIdx - 1);
+      }
     }
   });
 
@@ -727,20 +937,20 @@ function initProjectModals() {
 /* --------------------------------------------------------------------------
    5. Discovery Consultation Booking Modal & Retainer Preselection
    -------------------------------------------------------------------------- */
-function openBookingWithPlan(planName = 'Growth', planPrice = '₹7,999/month') {
+function openBookingWithPlan(planName = 'Growth', planPrice = '₹9,999/month') {
   const bookingModal = document.getElementById('bookingModal');
   if (!bookingModal) return;
 
   const badgeText = document.getElementById('formPlanBadgeText');
   const planPills = document.querySelectorAll('#planPillsContainer .neuv-pill');
 
-  let targetValue = 'Growth — ₹7,999/month';
+  let targetValue = 'Growth — ₹9,999/month';
   const nameLower = planName.toLowerCase();
 
   if (nameLower.includes('starter')) {
     targetValue = 'Starter — ₹4,999/month';
   } else if (nameLower.includes('growth')) {
-    targetValue = 'Growth — ₹7,999/month';
+    targetValue = 'Growth — ₹9,999/month';
   } else if (nameLower.includes('premium')) {
     targetValue = 'Premium — ₹17,999/month';
   } else if (nameLower.includes('shoot') || nameLower.includes('model')) {
@@ -793,7 +1003,7 @@ function initBookingModal() {
   if (!bookingModal) return;
 
   function openBooking() {
-    openBookingWithPlan('Growth', '₹7,999/month');
+    openBookingWithPlan('Growth', '₹9,999/month');
   }
 
   function closeBooking() {
@@ -822,7 +1032,7 @@ function initPricingInteractions() {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const plan = btn.getAttribute('data-plan') || 'Growth';
-      const price = btn.getAttribute('data-price') || '₹7,999/month';
+      const price = btn.getAttribute('data-price') || '₹9,999/month';
       openBookingWithPlan(plan, price);
     });
   });
@@ -919,7 +1129,7 @@ function initFormPills() {
 /* --------------------------------------------------------------------------
    7. Consultation Form Submission & Direct WhatsApp Forwarding
    -------------------------------------------------------------------------- */
-const WHATSAPP_NUMBER = '919876543210';
+const WHATSAPP_NUMBER = '918446190244';
 
 function initConsultationForm() {
   const forms = document.querySelectorAll('.whatsapp-inquiry-form, #luxuryInquiryForm, #inlineContactForm');
@@ -939,7 +1149,7 @@ function initConsultationForm() {
       const phone = phoneInput ? phoneInput.value.trim() : '';
       const details = detailsInput ? detailsInput.value.trim() : '';
 
-      const selectedPlan = form.querySelector('input[type="radio"]:checked')?.value || 'Growth — ₹7,999/month';
+      const selectedPlan = form.querySelector('input[type="radio"]:checked')?.value || 'Growth — ₹9,999/month';
 
       const selectedServices = Array.from(form.querySelectorAll('input[name="services"]:checked'))
         .map(cb => cb.value)

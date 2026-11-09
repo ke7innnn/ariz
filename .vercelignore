@@ -2,5 +2,5 @@ node_modules
 screenshots
 references
 scripts
-*.png
+screenshot_*.png
 .DS_Store
